@@ -15,20 +15,19 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->bigInteger("id");
-            $table->primary("id");
-            $table->string("costumer", 255);
-            $table->string("phone", 255);
+            $table->bigInteger("id")->unsigned()->primary();
+            $table->string("costumer", 255)->comment("имя клиента");
+            $table->string("phone", 255)->comment("телефон клиента");
             $table->timestamp('created_at');
             $table->timestamp('completed_at');
-            $table->bigInteger("user_id");
+            $table->bigInteger("user_id")->unsigned();
+            $table->string("type", 255); // ["online", "offline"]
+            $table->string("status", 255); // ["active", "completed", "canceled"]
+
             $table->foreign("user_id")->references("id")->on("users");
-            $table->enum("type",["online", "offline"]);
-            $table->enum("status",["active", "completed", "canceled"]);
         });
     }
 
-//    $table->enum('difficulty', ['easy', 'hard']);
 
     /**
      * Reverse the migrations.
