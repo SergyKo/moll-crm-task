@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property int $user_id
- * @property string $costumer
+ * @property string $customer
  * @property string $phone
  * @property Carbon $created_at
  * @property Carbon $completed_at
@@ -20,6 +20,25 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Order extends Model
 {
+    const UPDATED_AT = null;
+
+    public const TYPE_ONLINE = "online";
+    public const TYPE_OFFLINE = "offline";
+    public static array $types = [
+        self::TYPE_ONLINE,
+        self::TYPE_OFFLINE
+    ];
+
+    public const STATUS_ACTIVE = "active";
+    public const STATUS_COMPLETED = "completed";
+    public const STATUS_CANCELED = "canceled";
+
+    public static array $statuses = [
+        self::STATUS_ACTIVE,
+        self::STATUS_COMPLETED,
+        self::STATUS_CANCELED
+    ];
+
     /**
      * @var array
      */

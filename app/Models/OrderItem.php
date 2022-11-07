@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $cost
  *
  * @property Order $order
- * @property Product $product
+ * @property Product $products
  */
 class OrderItem extends Model
 {

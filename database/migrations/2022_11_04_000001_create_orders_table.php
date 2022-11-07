@@ -16,10 +16,10 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigInteger("id")->unsigned()->autoIncrement();
-            $table->string("costumer", 255)->comment("имя клиента");
+            $table->string("customer", 255)->comment("имя клиента");
             $table->string("phone", 255)->comment("телефон клиента");
             $table->timestamp('created_at');
-            $table->timestamp('completed_at');
+            $table->timestamp('completed_at')->nullable();
             $table->bigInteger("user_id")->unsigned();
             $table->string("type", 255); // ["online", "offline"]
             $table->string("status", 255); // ["active", "completed", "canceled"]
