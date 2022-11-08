@@ -76,6 +76,6 @@ class OrderController extends Controller
 
         $order->fill($request->post())->save();
 
-        return redirect()->route('orders.index')->with("success", "Заказ " . $order->id . " успешно изменен!");
+        return redirect()->route('order-index')->with("success", "Заказ " . $order->id . " успешно изменен!");
     }
 }
