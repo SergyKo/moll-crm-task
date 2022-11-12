@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -63,17 +64,22 @@ class ProductController extends Controller
 
     /**
      * @param Request $request
-     * @param Product $product
      * @return RedirectResponse
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, int $id)
     {
+
+        Log::info(' update id : ', [$id]);
         $request->validate([
             "name" => ['required', "max:255"],
         ]);
 
+        $name = $request->input('name');
+        Log::info('name: ', [$name]);
+
+        $product = Product::findOrFail($id);
         $product->fill($request->post())->save();
 
-        return redirect()->route('orders.index')->with("success", "Товар " . $product->id . " успешно изменен!");
+        return redirect()->route('product-index')->with("success", "Товар " . $product->id . " успешно изменен!");
     }
 }

@@ -19,16 +19,24 @@ Route::get('/', function () {
 
 //Route::get('/user', [\App\Http\Controllers\UserController::class, 'index']);
 
-//order
+// order
 Route::get('/order', [\App\Http\Controllers\OrderController::class, 'index'])->name("order-index");
 Route::get('/order/create', [\App\Http\Controllers\OrderController::class, 'create'])->name("order-create");
 Route::get('/order/{id}', [\App\Http\Controllers\OrderController::class, 'show'])->name("order-view");
 Route::get('/order/{id}/edit', [\App\Http\Controllers\OrderController::class, 'edit'])->name("order-edit");
-Route::post('/order/{id}/delete', [\App\Http\Controllers\OrderController::class, 'delete'])->name("order-delete");
-Route::post('/order/{id}/update', [\App\Http\Controllers\OrderController::class, 'update'])->name("order-update");
+Route::delete('/order/delete/{id}', [\App\Http\Controllers\OrderController::class, 'delete'])->name("order-delete");
+Route::put('/order/update/{id}', [\App\Http\Controllers\OrderController::class, 'update'])->name("order-update");
 
+// user
+Route::get('/user/{id}', [\App\Http\Controllers\UserController::class, 'show'])->name("user-view");
+Route::get('/user', [\App\Http\Controllers\UserController::class, 'index'])->name("user-index");
+Route::get('/user/{id}/edit', [\App\Http\Controllers\UserController::class, 'edit'])->name("user-edit");
+Route::delete('/user/delete/{id}', [\App\Http\Controllers\UserController::class, 'delete'])->name("user-delete");
+Route::put('/user/update/{id}', [\App\Http\Controllers\UserController::class, 'update'])->name("user-update");
 
-Route::get('/product/{id}', [\App\Http\Controllers\ProductController::class, 'show']);
-Route::get('/user/{id}', [\App\Http\Controllers\UserController::class, 'show']);
-//edit
-
+// product
+Route::get('/product/{id}', [\App\Http\Controllers\ProductController::class, 'show'])->name("product-view");
+Route::get('/product', [\App\Http\Controllers\ProductController::class, 'index'])->name("product-index");
+Route::get('/product/{id}/edit', [\App\Http\Controllers\ProductController::class, 'edit'])->name("product-edit");
+Route::delete('/product/delete/{id}', [\App\Http\Controllers\ProductController::class, 'delete'])->name("product-delete");
+Route::put('/product/update/{id}', [\App\Http\Controllers\ProductController::class, 'update'])->name("product-update");

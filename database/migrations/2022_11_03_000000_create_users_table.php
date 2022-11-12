@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigInteger("id")->unsigned()->autoIncrement();
             $table->string('name', 255);
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

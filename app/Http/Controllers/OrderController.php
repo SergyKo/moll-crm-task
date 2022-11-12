@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use \Illuminate\View\View;
 
@@ -64,18 +65,30 @@ class OrderController extends Controller
 
     /**
      * @param Request $request
-     * @param Order $order
      * @return RedirectResponse
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, int $id)
     {
-        $request->validate([
+        Log::info('Order id: ', [$id]);
+
+         $request->validate([
             "type" => ['required', Rule::in(Order::$types)],
             "status" => ['required', Rule::in(Order::$statuses)],
         ]);
 
+       $order = Order::findOrFail($id);
+
+        $input = $request->all();
+        Log::info('request->all: ', [$input]);
+
+        $customer = $request->input('customer');
+        Log::info('customer: ', [$customer]);
+
+        $phone = $request->input('phone');
+        Log::info('customer: ', [$phone]);
+
         $order->fill($request->post())->save();
 
-        return redirect()->route('order-index')->with("success", "Заказ " . $order->id . " успешно изменен!");
+        return redirect()->route('order-index')->with("success", "Заказ " . $id . " успешно изменен!");
     }
 }
